@@ -38,6 +38,10 @@
           <div class="companion-hud" id="companionHud"><div class="companion-orb" id="companionOrb">✦</div><div><small>VÍNCULO ATIVO</small><b id="companionName">Nenhum</b><div class="companion-life"><i id="companionBar"></i></div></div><span id="companionLevel">—</span></div>
           <div class="stage-hint" id="stageHint"><kbd>E</kbd> Interagir <span>·</span> <kbd>J</kbd> Atacar <span>·</span> <kbd>K</kbd> Vínculo</div>
           <div class="combat-banner" id="combatBanner" hidden></div>
+          <section class="battle-hud" id="battleHud" hidden aria-label="Combate por turnos">
+            <div class="battle-status"><div><small>SEU VÉLION</small><b id="battleAllyName">—</b><span id="battleAllyHpText">—</span><i class="battle-meter"><i id="battleAllyHp"></i></i></div><div class="battle-message" id="battleMessage">Escolha uma habilidade</div><div class="enemy-status"><small>VÉLION SELVAGEM</small><b id="battleEnemyName">—</b><span id="battleEnemyHpText">—</span><i class="battle-meter"><i id="battleEnemyHp"></i></i></div></div>
+            <div class="battle-actions" id="battleActions"></div>
+          </section>
           <div class="touch-controls" aria-label="Controles móveis"><div class="dpad"><button data-move="up">▲</button><div><button data-move="left">◀</button><button data-move="down">▼</button><button data-move="right">▶</button></div></div><div class="touch-actions"><button data-action="attack">⚔</button><button data-action="capture">◎</button><button data-action="interact">E</button></div></div>
         </div>
         <div class="world-bottom"><div class="story-column"><div class="section-heading"><div><span class="kicker">O FIO DO VÉU</span><h2 id="storyTitle">Um chamado sob as raízes</h2></div><span class="turn-label" id="dayLabel">DIA 01</span></div><div class="story-feed" id="storyFeed" aria-live="polite"></div><div class="quick-actions"><span>ATALHOS</span><button data-action="attack">J Golpear</button><button data-action="capture">K Selar vínculo</button><button data-action="interact">E Interagir</button><button data-panel="map">M Mapa</button></div></div>

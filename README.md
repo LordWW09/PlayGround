@@ -17,14 +17,15 @@ Depois, acesse <http://localhost:8000>. Para jogar em um telefone ou tablet na m
 | Ação | Teclado | Toque |
 | --- | --- | --- |
 | Mover | `WASD` ou setas | Direcional na tela |
-| Atacar | `J` ou espaço | Botão de espada |
+| Iniciar combate / ataque rápido | `J` ou espaço | Botão de espada |
+| Escolher habilidade durante o combate | `1`–`3` ou `D` (ataque) | Botões de habilidade no HUD |
 | Interagir / recolher / conversar | `E` | Botão `E` |
 | Tentar vínculo com criatura próxima | `K` | Botão de selo (`◎`) |
 | Correr | Segurar `Shift` | — |
 | Abrir mapa | `M` | Botão “Abrir mapa” |
 | Explorar, equipe, bestiário, crônicas, bolsa | `1`–`5` | Menu da interface |
 
-Aproxime-se do Vélion ferido junto às ruínas e use `E` para conversar. Oferecer uma fruta aumenta a confiança; em seguida, escolha “Selar vínculo”. Outras criaturas podem ser enfraquecidas antes da tentativa de captura. Explore pontos brilhantes para recolher recursos, consulte o mapa para viajar e use a tela da equipe para alimentar, reorganizar ou liberar companheiros. Criaturas ganham experiência e podem evoluir.
+Aproxime-se do Vélion ferido junto às ruínas e use `E` para conversar. Oferecer uma fruta aumenta a confiança; em seguida, escolha “Selar vínculo”. Com um Vélion na equipe ativa, use `J`/espaço ou o botão de espada perto de uma criatura selvagem para iniciar um combate por turnos. Escolha uma habilidade no HUD (ou pressione `1`–`3`); `D` usa um ataque direto. A defesa reduz o dano da resposta inimiga. Também é possível enfraquecer criaturas antes de tentar capturá-las com `K` ou o botão de selo. Explore pontos brilhantes para recolher recursos, consulte o mapa para viajar e use a tela da equipe para alimentar, reorganizar ou liberar companheiros. Criaturas ganham experiência e podem evoluir.
 
 ### Salvamento
 
@@ -33,7 +34,7 @@ O jogo salva automaticamente durante a jornada e também oferece o botão de sal
 ## Escopo do protótipo
 
 - Exploração top-down em canvas com regiões, obstáculos, pontos de coleta, ruínas e altar.
-- Encontros em tempo real, ataque, captura por selos e uma equipe de até quatro Vélions, além de refúgio.
+- Combate por turnos com HUD e habilidades próprias de cada elemento, além de captura por selos, equipe de até quatro Vélions e refúgio.
 - Progressão de nível, alimentação, afinidade, evolução com escolha de forma, bestiário e crônicas com recompensas.
 - Viagem regional, interface adaptável, controles de toque, efeitos sonoros simples e salvamento local.
 
