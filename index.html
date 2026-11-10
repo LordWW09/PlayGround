@@ -29,6 +29,7 @@
         <button class="nav-item active" data-panel="world"><span>⌂</span> Mundo <kbd>1</kbd></button>
         <button class="nav-item" data-panel="journal"><span>▤</span> Diário <b class="nav-count" id="questCount">2</b></button>
         <button class="nav-item" data-panel="codex"><span>✧</span> Códice</button>
+        <button class="nav-item" data-panel="sheet"><span>♙</span> Ficha</button>
       </div>
       <div class="sidebar-bottom">
         <div class="season-card"><div class="season-icon">☾</div><div><b>Outono, ano 327</b><small>300 anos após a Ruptura</small></div></div>
@@ -78,9 +79,11 @@
       </section>
       <section class="view subview" id="journalView"><div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> MEMÓRIAS & PROMESSAS</div><h1>Diário de <em>jornada</em></h1><p>Os fios que você escolheu seguir — e aqueles que deixou para trás.</p></div><div id="journalContent"></div></section>
       <section class="view subview" id="codexView"><div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> CONHECIMENTO REUNIDO</div><h1>Códice de <em>Aetherion</em></h1><p>Um mundo que não revela seus segredos de uma vez.</p></div><div id="codexContent"></div></section>
+      <section class="view subview" id="sheetView"><div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> REGISTRO DE AVENTUREIRO</div><h1>Ficha de <em>personagem</em></h1><p>Seus atributos, treinamento e dons moldam como você enfrenta Aetherion.</p></div><div id="sheetContent"></div></section>
       <footer class="footer-note">ECOS DO DESTINO <span>·</span> CADA ESCOLHA DEIXA UM ECO</footer>
     </main>
   </div>
+  <div class="creation-overlay" id="creationOverlay" aria-hidden="true"><section class="creation-panel" role="dialog" aria-modal="true" aria-labelledby="creationTitle"><div class="modal-head"><div><span class="section-kicker">AETHERION · PRIMEIRO, QUEM VOCÊ É?</span><h2 id="creationTitle">Forje sua <em>ficha</em></h2></div><button class="icon-button" id="closeCreation" aria-label="Fechar criação">×</button></div><p class="map-intro">Distribua 27 pontos entre os atributos (8–15). Sua origem e vocação concedem outros dons. A história só começa quando sua ficha estiver pronta.</p><form id="characterForm"><div class="creation-identity"><label>Nome do personagem<input id="sheetName" maxlength="24" required value="Viajante"></label><label>Raça<select id="sheetRace"></select></label><label>Classe<select id="sheetClass"></select></label></div><div class="creation-stats" id="creationStats"></div><div class="point-buy"><span id="pointsRemaining">27 pontos restantes</span><span>Custos: 8–13 = 0–5 · 14 = 7 · 15 = 9</span></div><div class="creation-summary" id="creationSummary"></div><div class="creation-actions"><button type="button" class="secondary-button" id="cancelCreation">Cancelar</button><button type="submit" class="send-button">Confirmar ficha <span>↗</span></button></div></form></section></div>
   <div class="map-overlay" id="mapOverlay" aria-hidden="true"><div class="map-panel"><div class="modal-head"><div><span class="section-kicker">AETHERION · CARTA-MÚNDI</span><h2>Um mundo <em>por descobrir</em></h2></div><button class="icon-button close-map" aria-label="Fechar mapa">×</button></div><p class="map-intro">Escolha para onde os seus passos levam. Cada região guarda histórias próprias.</p><div class="region-grid" id="regionGrid"></div><div class="map-legend"><span><i class="legend-dot here"></i> Você está aqui</span><span><i class="legend-dot open"></i> Caminhos conhecidos</span><span><i class="legend-dot veil"></i> Além da névoa</span></div></div></div>
   <div class="toast" id="toast" role="status"></div>
   <script src="game.js"></script>
