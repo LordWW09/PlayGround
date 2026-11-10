@@ -1,18 +1,27 @@
-# PlayGround
+# SEED — mesa virtual local-first
 
-<!-- omgithub:readme:start -->
-## 🚀 Build, play, and remix with OMGithub
+SEED é uma interface de mesa virtual para campanhas de RPG, com foco em fichas, mapas 2D e ferramentas simples para sessões. A aplicação é executada no navegador e não exige conta, servidor ou serviço pago.
 
-**Created using [OMGithub.com](https://go.ondev.store/).**
+## Executar
 
-[![OMGithub](https://img.shields.io/badge/OMGithub-Open%20project-orange?style=for-the-badge)](https://go.ondev.store/LordWW09/PlayGround)
-[![GitHub](https://img.shields.io/badge/GitHub-Source-181717?logo=github&style=for-the-badge)](https://github.com/LordWW09/PlayGround)
+Abra `index.html` em um navegador moderno. O estado é mantido no `localStorage` do navegador. Para preservar ou transferir seus dados, use as opções de backup e restauração em **Configurações**.
 
-- 🎮 [Open the project](https://go.ondev.store/LordWW09/PlayGround).
-- ✨ [Remix this project](https://go.ondev.store/LordWW09/PlayGround?remix=1).
-- 💻 [Explore the source](https://github.com/LordWW09/PlayGround).
-- 🛠️ [Check build runs](https://github.com/LordWW09/PlayGround/actions).
-- 🐛 [Report an issue](https://github.com/LordWW09/PlayGround/issues).
-- 👤 [Explore the creator's projects](https://go.ondev.store/LordWW09).
-- 🌍 [Create with OMGithub](https://go.ondev.store/).
-<!-- omgithub:readme:end -->
+## Recursos
+
+- Campanhas, sessões, personagens e sistemas configuráveis; inclui ficha de D&D 5ª Edição.
+- Mesa 2D com imagens da biblioteca, grade quadrada/hexagonal, tokens, iniciativa e chat local.
+- Ferramenta **Medir**: clique em dois pontos para visualizar uma distância aproximada; a escala considera 5 pés por quadrado (ou por célula de 48 px sem grade).
+- Ferramentas de névoa: **Ocultar área** pinta células opacas e **Revelar área** remove a névoa. As células são persistidas por campanha neste navegador e acompanham o estado do backup.
+- Biblioteca local para imagens, PDFs e texto, além de exportação/importação do estado.
+
+## Limitações e privacidade
+
+- O armazenamento fica apenas neste navegador e neste perfil. Não há sincronização entre dispositivos, serviço multiplayer remoto, autenticação ou permissões por jogador; a interface é operada localmente pelo Mestre.
+- Os PDFs e demais arquivos são armazenados como data URL na biblioteca, mas não há leitor/visualizador de PDF embutido. Abra o arquivo fora do SEED ou mantenha-o como referência para consulta externa.
+- O limite atual de importação é 1,5 MB por arquivo e o espaço disponível depende da quota do navegador. Arquivos grandes podem esgotar o `localStorage`; faça backups e remova arquivos desnecessários.
+- A medida é uma estimativa em pés baseada na distância em pixels e na escala configurada; não aplica regras específicas de movimento ou terreno.
+- A ficha D&D é uma implementação de campos comuns de jogo, sem automação completa de regras ou reprodução literal de materiais proprietários.
+
+## Desenvolvimento e validação
+
+A aplicação é composta por HTML, CSS e JavaScript sem dependências de runtime ou APIs pagas. Verifique a sintaxe do JavaScript com `node --check app.js`.
