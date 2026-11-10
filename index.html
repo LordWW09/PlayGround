@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#182e27">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231c382f'/%3E%3Cpath d='M32 7 39 25 57 32 39 39 32 57 25 39 7 32 25 25z' fill='%23f1ce77'/%3E%3C/svg%3E">
+<title>Whispering Grove — A pocket-sized adventure</title>
+<style>
+:root{--gold:#f4d28a;--cream:#fff4d8;--ink:#17231e;--glass:rgba(20,35,29,.77);--line:rgba(255,244,216,.2)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#182e27;color:var(--cream);font-family:Georgia,'Times New Roman',serif;touch-action:none}canvas{display:block;width:100%;height:100%}#game{position:fixed;inset:0}#hud{position:absolute;inset:0;pointer-events:none;display:none}.topbar{position:absolute;left:clamp(14px,4vw,48px);right:clamp(14px,4vw,48px);top:clamp(13px,3vh,28px);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-size:clamp(11px,1.5vw,14px);text-transform:uppercase;letter-spacing:.22em;color:#d9e3be;text-shadow:0 2px 6px #14231c}.quest{display:flex;align-items:center;gap:12px;background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:10px 15px;box-shadow:0 10px 30px #15251c55;backdrop-filter:blur(12px)}.quest-mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e6c576;color:#43331d;font-size:17px}.quest small{display:block;font:10px/1.3 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#b8c5a9}.quest strong{font:14px/1.3 system-ui,sans-serif;color:#fff4d8}.status{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:11px 15px;min-width:145px;backdrop-filter:blur(12px)}.hearts{display:flex;gap:4px;font:18px/1 system-ui,sans-serif;color:#ee8b72;filter:drop-shadow(0 1px 3px #000)}.hearts .empty{color:#7d7a67}.relic-count{margin-top:7px;display:flex;align-items:center;gap:7px;font:11px system-ui,sans-serif;color:#dfd7b8}.relic-icon{color:#f4d28a;font-size:15px}.hint{position:absolute;left:50%;top:19%;transform:translateX(-50%);white-space:nowrap;background:rgba(23,35,30,.66);padding:9px 16px;border:1px solid var(--line);border-radius:30px;font:12px system-ui,sans-serif;color:#f8edcd;opacity:0;transition:opacity .25s}.hint.show{opacity:1}.bottom-tip{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);white-space:nowrap;background:var(--glass);border:1px solid var(--line);padding:9px 15px;border-radius:20px;font:11px system-ui,sans-serif;color:#d6dec8;opacity:.9}.bottom-tip b{color:#f4d28a}.mobile-controls{display:none;position:absolute;inset:auto 0 max(20px,env(safe-area-inset-bottom)) 0;height:145px;pointer-events:none}.stick-zone{position:absolute;left:22px;bottom:0;width:132px;height:132px;pointer-events:auto}.stick-base{position:absolute;inset:0;border-radius:50%;background:#10231b6b;border:1px solid #fff4d844;backdrop-filter:blur(4px)}.stick-knob{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px;border-radius:50%;background:linear-gradient(145deg,#fff1ce,#d8bb7e);border:2px solid #fff8dfaa;box-shadow:0 4px 14px #0007}.actions{position:absolute;right:20px;bottom:3px;display:flex;align-items:flex-end;gap:11px;pointer-events:auto}.action{width:64px;height:64px;border-radius:50%;border:1px solid #fff4d877;background:linear-gradient(145deg,#465b49dd,#1d3429ee);color:#fff2d1;box-shadow:0 5px 16px #0006;display:grid;place-items:center;user-select:none;-webkit-user-select:none;touch-action:none}.action.main{width:76px;height:76px;background:linear-gradient(145deg,#d9bd7a,#9f7441);color:#2c281e}.action span{font:10px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;text-align:center}.action .glyph{display:block;font:22px/1 Georgia}.action:active,.action.pressed{transform:scale(.92);filter:brightness(1.2)}.overlay{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(90deg,rgba(16,31,25,.73),rgba(16,31,25,.14) 68%),linear-gradient(0deg,#172b24aa,transparent 58%)}.panel{width:min(510px,94vw);margin-right:auto;margin-left:clamp(0px,8vw,130px);padding:clamp(25px,5vw,50px);border:1px solid #f4d28a5c;border-radius:24px;background:linear-gradient(145deg,#1c382fef,#172921eF);box-shadow:0 28px 90px #07130f99;backdrop-filter:blur(12px);animation:rise .75s both}.eyebrow{font:11px system-ui,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#dec47f}.panel h1{font-size:clamp(42px,8vw,70px);font-weight:normal;line-height:.95;letter-spacing:-.04em;margin:19px 0 16px;color:#fff2d2;text-shadow:0 3px 25px #ebce8066}.panel p{font:15px/1.65 system-ui,sans-serif;color:#cbd5c3;max-width:380px;margin:0 0 23px}.feature{display:flex;gap:10px;align-items:center;color:#dbddc7;font:12px system-ui,sans-serif;margin:9px 0}.feature i{font-style:normal;color:var(--gold);font-size:17px}.start{margin-top:22px;display:flex;align-items:center;justify-content:space-between;width:100%;border:0;border-radius:13px;background:linear-gradient(100deg,#e5c779,#c69a55);color:#31291c;padding:15px 19px;font:bold 13px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 7px 22px #090f0c66;cursor:pointer}.start span:last-child{font-size:19px}.footnote{margin-top:16px!important;margin-bottom:0!important;font-size:11px!important;color:#9dad9d!important}.veil{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 60% 48%,transparent 35%,#10231d55 100%)}.toast{position:absolute;top:31%;left:50%;transform:translate(-50%,-10px);padding:10px 17px;border-radius:22px;background:#1a3028e8;border:1px solid #e8cb7c88;color:#ffe9ad;font:12px system-ui,sans-serif;opacity:0;transition:.3s;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}.minimap{position:absolute;right:clamp(14px,4vw,48px);bottom:clamp(15px,3vh,27px);width:116px;height:116px;border-radius:50%;border:2px solid #f2d89b99;background:#19382bc9;box-shadow:0 6px 25px #0005;overflow:hidden}.minimap canvas{width:100%;height:100%}.end-panel{text-align:center}.end-panel h2{font-size:38px;font-weight:normal;color:#f2d58d;margin:8px 0 12px}.end-panel p{margin:0 auto 15px}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.topbar{align-items:flex-start}.brand{display:none}.quest{padding:8px 11px;gap:8px}.quest-mark{width:29px;height:29px}.quest strong{font-size:12px}.status{min-width:116px;padding:9px 11px}.hearts{font-size:16px}.relic-count{font-size:10px}.mobile-controls{display:block}.bottom-tip{display:none}.minimap{width:88px;height:88px;bottom:auto;top:94px;right:15px}.panel{margin:0;padding:27px 25px}.panel p{font-size:14px}.overlay{background:linear-gradient(90deg,rgba(16,31,25,.76),rgba(16,31,25,.26)),linear-gradient(0deg,#172b24aa,transparent 58%)}}
+@media(pointer:coarse){.mobile-controls{display:block}.bottom-tip{display:none}}
+</style>
+</head>
+<body>
+<div id="game"><div class="veil"></div></div>
+<div id="hud">
+  <div class="topbar"><div class="brand">✦ &nbsp; A pocket-sized adventure</div><div class="quest"><div class="quest-mark">✧</div><div><small>Current quest</small><strong id="questText">Gather the lost starlight</strong></div></div><div class="status"><div class="hearts" id="hearts"></div><div class="relic-count"><span class="relic-icon">✦</span><span id="relicText">Starlight&nbsp; 0 / 3</span></div></div></div>
+  <div class="hint" id="hint"></div><div class="toast" id="toast"></div>
+  <div class="bottom-tip"><b>WASD</b> move &nbsp;·&nbsp; <b>SPACE</b> sword &nbsp;·&nbsp; <b>SHIFT</b> roll &nbsp;·&nbsp; <b>E</b> interact</div>
+  <div class="minimap"><canvas id="map" width="180" height="180"></canvas></div>
+  <div class="mobile-controls"><div class="stick-zone" id="stick"><div class="stick-base"></div><div class="stick-knob" id="knob"></div></div><div class="actions"><button class="action" id="rollBtn"><span><i class="glyph">↗</i>Roll</span></button><button class="action main" id="attackBtn"><span><i class="glyph">⚔</i>Slash</span></button><button class="action" id="useBtn"><span><i class="glyph">✧</i>Use</span></button></div></div>
+</div>
+<div class="overlay" id="intro"><section class="panel"><div class="eyebrow">A small 3D adventure</div><h1>Whispering<br>Grove</h1><p>The old forest shrine has gone quiet. Find the three scattered starlights, fend off the shadows, and wake the grove.</p><div class="feature"><i>✦</i><span>Explore a hand-crafted woodland in full 3D</span></div><div class="feature"><i>⚔</i><span>Face shy little shadow sprites with your sword</span></div><div class="feature"><i>◈</i><span>Gather the light and restore the ancient shrine</span></div><button class="start" id="start"><span>Begin your journey</span><span>→</span></button><p class="footnote">WASD / arrows to move · Space to slash · E to interact<br>On mobile, use the on-screen controls.</p></section></div>
+<div class="overlay" id="ending" style="display:none"><section class="panel end-panel"><div class="eyebrow">The forest remembers</div><h2>The grove is awake</h2><p>Warm light returns to the old stones. Somewhere in the leaves, a tiny song begins again.</p><button class="start" id="again"><span>Wander once more</span><span>↻</span></button></section></div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const $=id=>document.getElementById(id);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x9ac4b2);scene.fog=new THREE.Fog(0x9ac4b2,34,88);
+const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,150);
+const isMobile=matchMedia('(max-width: 700px), (pointer: coarse)').matches;
+const renderer=new THREE.WebGLRenderer({antialias:!isMobile,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.25:1.7));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;$('game').prepend(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xd8f5e4,0x59613d,2.1));const sun=new THREE.DirectionalLight(0xffe6b4,3.2);sun.position.set(-18,30,15);sun.castShadow=true;sun.shadow.mapSize.set(isMobile?1024:2048,isMobile?1024:2048);sun.shadow.camera.left=-38;sun.shadow.camera.right=38;sun.shadow.camera.top=38;sun.shadow.camera.bottom=-38;sun.shadow.bias=-.0002;scene.add(sun);
+const mat=(color,roughness=1,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+const mats={grass:mat(0x598454),grass2:mat(0x71915a),path:mat(0x9a8b69),stone:mat(0x7d826c),darkStone:mat(0x515e50),bark:mat(0x684b32),leaf:mat(0x35664c),leaf2:mat(0x4c8056),leaf3:mat(0x658b57),gold:mat(0xf1ce77,.6,.35),cream:mat(0xf4e4bc),blue:mat(0x5c8793),red:mat(0xbd735d),leather:mat(0x634936),metal:mat(0xb7c3ae,.4,.7),shadow:mat(0x243d48),wood:mat(0x9d7544)};
+function box(parent,name,pos,size,material,opts={}){const m=new THREE.Mesh(new THREE.BoxGeometry(...size),material);m.name=name;m.position.set(...pos);m.castShadow=opts.cast!==false;m.receiveShadow=opts.receive!==false;parent.add(m);return m}
+function sphere(parent,pos,scale,material,segments=12){const m=new THREE.Mesh(new THREE.SphereGeometry(1,segments,Math.max(8,segments>>1)),material);m.position.set(...pos);m.scale.set(...scale);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function cylinder(parent,pos,r1,r2,h,material,segments=8){const m=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,segments),material);m.position.set(...pos);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function cone(parent,pos,r,h,material,segments=7){const m=new THREE.Mesh(new THREE.ConeGeometry(r,h,segments),material);m.position.set(...pos);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+
+// Soft rolling clearing with a winding, pale trail.
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(120,120),mats.grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.12;ground.receiveShadow=true;scene.add(ground);
+// Broken trail stones guide the eye toward the shrine.
+for(let i=0;i<21;i++){const z=12-i*1.72;const x=Math.sin(i*.48)*1.25;const stone=box(scene,'trail',[x,.025,z],[2.5+Math.random()*.7,.12,1.45+Math.random()*.45],i%4===0?mats.path:mats.stone,{cast:false});stone.rotation.y=Math.sin(i*2)*.12;}
+// Soft grass tufts and tiny flowers around the clearing.
+const flowerMats=[mat(0xf2cf83),mat(0xe4ebe0),mat(0xc9a8c6)];
+for(let i=0;i<(isMobile?90:180);i++){let x=(Math.random()-.5)*53,z=(Math.random()-.5)*65;if(Math.abs(x)<3.2&&z<14&&z>-30)continue;const h=.16+Math.random()*.24;const tuft=cone(scene,[x,h/2-.04,z],.085+Math.random()*.07,h,i%7===0?flowerMats[i%3]:mats.grass2,5);tuft.rotation.z=(Math.random()-.5)*.8;tuft.castShadow=false;}
+// Forest ring, low-poly trunks and layered crowns.
+const trees=[];const treeCount=isMobile?48:72;
+for(let i=0;i<treeCount;i++){let angle=i/treeCount*Math.PI*2;let radius=26+Math.random()*9;let x=Math.cos(angle)*radius,z=Math.sin(angle)*radius*.84;if(Math.abs(x)<5&&z<20&&z>-38)continue;trees.push([x,z]);let h=2.2+Math.random()*1.8;cylinder(scene,[x,h*.48,z],.27+Math.random()*.22,.43,h,mats.bark,7);for(let j=0;j<3;j++){cone(scene,[x,h*.72+j*.83,z],1.6-j*.25,2.3,mats[['leaf','leaf2','leaf3'][(i+j)%3]],7).rotation.y=Math.random()*2;}}
+// Standing stones make an ancient, welcoming shrine at the far end of the path.
+const shrine=new THREE.Group();shrine.position.set(0,0,-29);scene.add(shrine);
+box(shrine,'altar base',[0,.36,0],[6.4,.7,3.7],mats.darkStone);
+box(shrine,'altar step',[0,.78,.08],[5.3,.25,2.9],mats.stone);
+box(shrine,'altar slab',[0,1.01,0],[3.3,.18,2],mats.wood);
+for(const x of [-3.6,3.6]){box(shrine,'pillar',[x,2.4,-.7],[.75,3.1,.8],mats.darkStone);box(shrine,'cap',[x,4.05,-.7],[1.2,.35,1.15],mats.stone);}
+box(shrine,'lintel',[0,4.03,-.7],[7.8,.7,1],mats.stone);
+// Gate's golden center and floating gem.
+const rune=sphere(shrine,[0,2.35,-.3],[.58,.72,.26],mats.gold,8);const inner=sphere(shrine,[0,2.35,-.54],[.23,.3,.11],mats.cream,8);
+// Decorative carved sigil and small lanterns.
+for(const x of [-2.7,2.7]){cylinder(shrine,[x,1.35,.2],.18,.22,.5,mats.gold,8);sphere(shrine,[x,1.75,.2],[.16,.22,.16],mat(0xffd979,.35),10);}
+
+// Hero, built from simple readable shapes with a jaunty cap and little sword.
+function makeHero(){const g=new THREE.Group();const body=new THREE.Group();g.add(body);body.name='body';
+ sphere(body,[0,1.36,0],[.43,.57,.31],mats.blue,12);sphere(body,[0,1.14,.02],[.46,.21,.33],mats.cream,10);
+ sphere(body,[0,2.16,0],[.34,.38,.32],mat(0xe7bd91),12);
+ // ears
+ sphere(body,[-.36,2.13,0],[.12,.19,.1],mat(0xdcae83),8);sphere(body,[.36,2.13,0],[.12,.19,.1],mat(0xdcae83),8);
+ // Hair fringe and cap
+ sphere(body,[0,2.38,-.04],[.36,.2,.34],mats.leather,10);const cap=cone(body,[0,2.72,-.06],.34,.67,mat(0x718c55),8);cap.rotation.z=-.22;
+ sphere(body,[0,2.08,.285],[.22,.11,.08],mat(0xf5ebd1),8);sphere(body,[-.12,2.16,.292],[.035,.055,.025],mat(0x25372c),8);sphere(body,[.12,2.16,.292],[.035,.055,.025],mat(0x25372c),8);
+ // Legs and boots
+ const legs=[];for(const x of [-.2,.2]){const leg=box(body,'leg',[x,.57,0],[.19,.55,.2],mats.cream);const boot=box(body,'boot',[x,.25,.07],[.28,.22,.37],mats.leather);legs.push(leg);}
+ // belt and shoulder strap
+ box(body,'belt',[0,1.18,.01],[.79,.11,.35],mats.leather);
+ // sword rests at side, flashes on a swing
+ const sword=new THREE.Group();sword.position.set(.49,1.35,.12);sword.rotation.z=-.45;body.add(sword);box(sword,'blade',[0,.43,0],[.12,.76,.08],mats.metal);box(sword,'guard',[0,.08,0],[.38,.09,.13],mats.gold);box(sword,'hilt',[0,-.08,0],[.13,.25,.14],mats.leather);
+ g.userData={body,legs,sword,walk:0};g.position.set(0,0,13);scene.add(g);return g;}
+const hero=makeHero();
+
+// Three gentle shadow sprites patrol the clearing.
+const enemies=[];
+function makeWisp(x,z,phase){const g=new THREE.Group();g.position.set(x,0,z);scene.add(g);const core=sphere(g,[0,1.08,0],[.48,.57,.4],mats.shadow,9);sphere(g,[0,1.48,0],[.32,.19,.3],mat(0x466370),8);sphere(g,[-.14,1.15,.36],[.055,.075,.035],mat(0xffdda0),8);sphere(g,[.14,1.15,.36],[.055,.075,.035],mat(0xffdda0),8);for(let i=0;i<3;i++){const tail=cone(g,[(i-1)*.23,.44,0],.17,.54,mats.shadow,6);tail.rotation.z=(i-1)*-.28;}const glow=new THREE.PointLight(0x8dd9d0,.7,5);glow.position.y=1.3;g.add(glow);enemies.push({g,x,z,phase,hp:2,alive:true,hit:0,attack:0,homeX:x,homeZ:z});}
+makeWisp(-6,-4,0);makeWisp(6,-13,2);makeWisp(-5,-21,4);
+
+// Three floating starlights; their positions are marked on the tiny map.
+const shards=[];
+function makeShard(x,z){const g=new THREE.Group();g.position.set(x,.85,z);scene.add(g);const crystal=new THREE.OctahedronGeometry(.42,0);const gem=new THREE.Mesh(crystal,mats.gold);gem.castShadow=true;g.add(gem);const glow=new THREE.PointLight(0xffd877,1.5,6);g.add(glow);const ring=new THREE.Mesh(new THREE.TorusGeometry(.56,.035,6,20),new THREE.MeshBasicMaterial({color:0xffe7a3,transparent:true,opacity:.8}));ring.rotation.x=Math.PI/2;g.add(ring);shards.push({g,x,z,got:false,phase:Math.random()*5});}
+makeShard(-8,5);makeShard(8,-7);makeShard(0,-19);
+
+// A clear little floating marker over the shrine.
+const marker=new THREE.Group();marker.position.set(0,5.1,-29);scene.add(marker);const markGem=new THREE.Mesh(new THREE.OctahedronGeometry(.28),mats.gold);marker.add(markGem);const markerRing=new THREE.Mesh(new THREE.TorusGeometry(.48,.025,6,28),new THREE.MeshBasicMaterial({color:0xffdf8f,transparent:true,opacity:.8}));marker.add(markerRing);markerRing.rotation.x=1.2;
+
+// Gameplay state and responsive controls.
+let started=false,ended=false,health=5,relics=0,attackTime=0,rollTime=0,invuln=0,damageFlash=0,nearText='',toastTimer=0,interactCooldown=0;
+const keys={};let joy={x:0,y:0,active:false};let camYaw=0;let soundCtx=null;
+function beep(freq=440,duration=.09,type='sine',volume=.045){try{soundCtx??=new (window.AudioContext||window.webkitAudioContext)();const o=soundCtx.createOscillator(),gain=soundCtx.createGain();o.type=type;o.frequency.value=freq;gain.gain.setValueAtTime(volume,soundCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,soundCtx.currentTime+duration);o.connect(gain);gain.connect(soundCtx.destination);o.start();o.stop(soundCtx.currentTime+duration);}catch{}}
+function showToast(t){$('toast').textContent=t;$('toast').classList.add('show');toastTimer=2.2;}
+function updateHud(){ $('hearts').innerHTML=Array.from({length:5},(_,i)=>`<span class="${i>=health?'empty':''}">${i<health?'♥':'♡'}</span>`).join('');$('relicText').innerHTML=`Starlight&nbsp; ${relics} / 3`;if(relics===3)$('questText').textContent='Return to the forest shrine'; }
+function startGame(){started=true;$('intro').style.display='none';$('hud').style.display='block';beep(540,.15,'triangle');}
+$('start').addEventListener('click',startGame);
+window.addEventListener('keydown',e=>{keys[e.code]=true;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(!started&&e.code==='Enter')startGame();if(started&&e.code==='Space')attack();if(started&&(e.code==='ShiftLeft'||e.code==='ShiftRight'))roll();if(started&&e.code==='KeyE')interact();});window.addEventListener('keyup',e=>keys[e.code]=false);
+function bindButton(id,fn){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();el.classList.add('pressed');fn();});for(const ev of ['pointerup','pointercancel','pointerleave'])el.addEventListener(ev,()=>el.classList.remove('pressed'));}
+bindButton('attackBtn',()=>started&&attack());bindButton('rollBtn',()=>started&&roll());bindButton('useBtn',()=>started&&interact());
+const stick=$('stick'),knob=$('knob');let stickId=null;function stickMove(e){const r=stick.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;let dx=e.clientX-cx,dy=e.clientY-cy,lim=r.width*.36,d=Math.hypot(dx,dy);if(d>lim){dx*=lim/d;dy*=lim/d;}joy.x=dx/lim;joy.y=dy/lim;knob.style.transform=`translate(${dx}px,${dy}px)`;}
+stick.addEventListener('pointerdown',e=>{e.preventDefault();stickId=e.pointerId;stick.setPointerCapture(stickId);joy.active=true;stickMove(e)});stick.addEventListener('pointermove',e=>{if(e.pointerId===stickId)stickMove(e)});function releaseStick(){stickId=null;joy.active=false;joy.x=joy.y=0;knob.style.transform='translate(0,0)';}stick.addEventListener('pointerup',releaseStick);stick.addEventListener('pointercancel',releaseStick);
+function attack(){if(attackTime>0||rollTime>0)return;attackTime=.42;beep(270,.11,'sawtooth',.025);}
+function roll(){if(rollTime>0||attackTime>0)return;rollTime=.52;invuln=.62;beep(170,.17,'triangle',.04);}
+function interact(){if(interactCooldown>0)return;interactCooldown=.5;const d=Math.hypot(hero.position.x,hero.position.z+29);if(d<5){if(relics>=3){winGame();}else{showToast(`The shrine needs ${3-relics} more starlight${relics===2?'':'s'}.`);beep(230,.18,'sine');}}else if(nearText){showToast(nearText);beep(560,.07,'sine');}else{showToast('The old stones are far away.');}}
+function winGame(){if(ended)return;ended=true;$('ending').style.display='flex';beep(720,.45,'sine',.055);setTimeout(()=>beep(930,.55,'sine',.04),150);}
+$('again').addEventListener('click',()=>location.reload());
+function damage(){if(invuln>0||ended)return;health--;invuln=1.1;damageFlash=.26;beep(110,.2,'square',.045);updateHud();if(health<=0){health=5;hero.position.set(0,0,13);for(const e of enemies)if(e.alive)e.g.position.set(e.homeX,0,e.homeZ);showToast('The grove gives you another chance.');updateHud();}}
+updateHud();
+
+const clock=new THREE.Clock();const moveVec=new THREE.Vector3();const cameraTarget=new THREE.Vector3();const mapCanvas=$('map'),mapCtx=mapCanvas.getContext('2d');
+function drawMap(){const c=mapCtx,w=180,h=180;c.clearRect(0,0,w,h);c.fillStyle='#214637';c.fillRect(0,0,w,h);c.strokeStyle='#9f9471';c.lineWidth=7;c.beginPath();c.moveTo(90,148);c.bezierCurveTo(102,110,75,85,90,35);c.stroke();c.fillStyle='#a5a58b';c.fillRect(77,20,26,10);c.fillRect(68,28,8,14);c.fillRect(104,28,8,14);for(const s of shards){if(s.got)continue;const x=90+s.x*2.15,y=92+s.z*2.15;c.fillStyle='#f7d77f';c.beginPath();c.arc(x,y,4.2,0,Math.PI*2);c.fill();}for(const e of enemies){if(!e.alive)continue;const x=90+e.g.position.x*2.15,y=92+e.g.position.z*2.15;c.fillStyle='#ef9a7b';c.beginPath();c.arc(x,y,3,0,Math.PI*2);c.fill();}c.fillStyle='#fff0c4';c.beginPath();c.arc(90+hero.position.x*2.15,92+hero.position.z*2.15,4.5,0,Math.PI*2);c.fill();}
+let mapTimer=0;
+function update(dt,time){if(!started){camera.position.lerp(new THREE.Vector3(0,10,36),.015);camera.lookAt(0,2,-8);marker.rotation.y+=dt*.7;return;}
+ if(ended){marker.rotation.y+=dt*.8;return;}
+ attackTime=Math.max(0,attackTime-dt);rollTime=Math.max(0,rollTime-dt);invuln=Math.max(0,invuln-dt);interactCooldown=Math.max(0,interactCooldown-dt);if(toastTimer>0){toastTimer-=dt;if(toastTimer<=0)$('toast').classList.remove('show');}
+ let ix=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0)+joy.x;let iz=(keys.KeyS||keys.ArrowDown?1:0)-(keys.KeyW||keys.ArrowUp?1:0)+joy.y;const mag=Math.hypot(ix,iz);if(mag>1){ix/=mag;iz/=mag;}
+ const moving=Math.hypot(ix,iz)>.08;if(moving){hero.rotation.y=Math.atan2(ix,iz);hero.userData.walk+=dt*12;}
+ let speed=5.1;if(rollTime>0)speed=10.5;
+ if(moving){hero.position.x+=ix*speed*dt;hero.position.z+=iz*speed*dt;}
+ hero.position.x=THREE.MathUtils.clamp(hero.position.x,-22,22);hero.position.z=THREE.MathUtils.clamp(hero.position.z,-34,17);
+ const body=hero.userData.body,walk=hero.userData.walk;hero.userData.legs.forEach((leg,i)=>{leg.position.z=Math.sin(walk+(i*Math.PI))* (moving?.16:0);leg.rotation.x=Math.sin(walk+(i*Math.PI))*(moving?.55:0);});body.position.y=moving?Math.abs(Math.sin(walk*2))*.07:0;body.rotation.z=rollTime>0?Math.sin((.52-rollTime)*Math.PI*2)*.28:0;
+ const sword=hero.userData.sword;if(attackTime>0){let p=1-attackTime/.42;sword.rotation.y=-Math.sin(p*Math.PI)*1.8;sword.rotation.z=-.45-Math.sin(p*Math.PI)*1.35;}else{sword.rotation.y=THREE.MathUtils.damp(sword.rotation.y,0,12,dt);sword.rotation.z=THREE.MathUtils.damp(sword.rotation.z,-.45,12,dt);}
+ hero.visible=!(invuln>0&&Math.floor(time*15)%2===0);
+ const forward=new THREE.Vector3(Math.sin(hero.rotation.y),0,Math.cos(hero.rotation.y));
+ // Collect the three starlights.
+ for(const s of shards){s.g.position.y=.9+Math.sin(time*2.5+s.phase)*.18;s.g.rotation.y=time*.8+s.phase;s.g.children[2].rotation.z=time*.8;if(!s.got&&Math.hypot(hero.position.x-s.x,hero.position.z-s.z)<1.5){s.got=true;scene.remove(s.g);relics++;updateHud();showToast(`Starlight found · ${relics} of 3`);beep(680,.13,'sine',.055);setTimeout(()=>beep(900,.24,'sine',.035),100);}}
+ // Sprite patrol, chase, bump damage, and sword hits.
+ for(const e of enemies){if(!e.alive)continue;e.hit=Math.max(0,e.hit-dt);e.attack=Math.max(0,e.attack-dt);const dx=hero.position.x-e.g.position.x,dz=hero.position.z-e.g.position.z,d=Math.hypot(dx,dz);const aggro=d<8;let vx=0,vz=0;if(aggro&&d>1.45){vx=dx/d;vz=dz/d;}else if(!aggro){const t=time*.43+e.phase;const tx=e.homeX+Math.cos(t)*1.6, tz=e.homeZ+Math.sin(t*1.25)*1.2;const ddx=tx-e.g.position.x,ddz=tz-e.g.position.z,dd=Math.hypot(ddx,ddz);if(dd>.12){vx=ddx/dd*.35;vz=ddz/dd*.35;}}
+ e.g.position.x+=vx*1.4*dt;e.g.position.z+=vz*1.4*dt;e.g.position.y=.08+Math.sin(time*2+e.phase)*.13;if(Math.hypot(vx,vz)>.1)e.g.rotation.y=Math.atan2(vx,vz);e.g.children[0].material=e.hit>0?mats.red:mats.shadow;
+ if(d<1.38&&e.attack<=0){e.attack=.9;damage();}
+ if(attackTime>.12&&attackTime<.37&&d<2.8){const toward=new THREE.Vector3(dx,0,dz).normalize();if(forward.dot(toward)>.1&&e.hit<=0){e.hp--;e.hit=.42;e.g.position.x+=forward.x*.55;e.g.position.z+=forward.z*.55;beep(380,.08,'triangle',.04);if(e.hp<=0){e.alive=false;const burst=new THREE.PointLight(0xffc777,3,5);burst.position.copy(e.g.position).add(new THREE.Vector3(0,1,0));scene.add(burst);setTimeout(()=>scene.remove(burst),280);scene.remove(e.g);showToast('A shadow sprite drifts away.');}}}}
+ // Nearby shrine and objects get contextual prompts.
+ const shrineD=Math.hypot(hero.position.x,hero.position.z+29);if(shrineD<5){nearText=relics>=3?'Press E / Use to awaken the shrine':'The shrine is quiet';$('hint').textContent=relics>=3?'✧ &nbsp; Press E / Use to awaken the shrine':`✧ &nbsp; The shrine needs ${3-relics} more starlight`;$('hint').classList.add('show');}else{$('hint').classList.remove('show');nearText='';}
+ marker.rotation.y+=dt*.75;marker.position.y=5.05+Math.sin(time*1.8)*.16;
+ // Camera follows with a gentle chase and points up the path to the shrine.
+ cameraTarget.set(hero.position.x,1.05,hero.position.z-3.1);const desired=new THREE.Vector3(hero.position.x,hero.position.y+7.5,hero.position.z+10.5);camera.position.lerp(desired,1-Math.exp(-dt*3.1));camera.lookAt(cameraTarget);
+ if(damageFlash>0){damageFlash-=dt;renderer.domElement.style.filter='saturate(1.25) brightness(1.1)';}else renderer.domElement.style.filter='';
+ mapTimer+=dt;if(mapTimer>.18){drawMap();mapTimer=0;}
+}
+function frame(){requestAnimationFrame(frame);const dt=Math.min(clock.getDelta(),.035);update(dt,clock.elapsedTime);renderer.render(scene,camera);}
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,isMobile?1.25:1.7));});
+// Enable audio after the first real user gesture, respecting browser autoplay rules.
+window.addEventListener('pointerdown',()=>{if(soundCtx?.state==='suspended')soundCtx.resume();},{once:true});
+drawMap();frame();
+</script>
+</body>
+</html>
