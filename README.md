@@ -1,4 +1,51 @@
-# PlayGround
+# ECLIPSE: Crônicas do Véu
+
+Um protótipo original de RPG de exploração para navegador. Explore Elyndra, encontre criaturas chamadas Vélions, forme vínculos, cuide da sua equipe e descubra novas regiões. O projeto é single-player e não utiliza personagens ou cenários de franquias existentes.
+
+## Como jogar
+
+Não há etapa de build nem dependências de pacote. Abra `index.html` em um navegador moderno ou sirva a pasta localmente, por exemplo:
+
+```sh
+python3 -m http.server 8000
+```
+
+Depois, acesse <http://localhost:8000>. Para jogar em um telefone ou tablet na mesma rede, abra o endereço do servidor usando o IP local do computador e a porta `8000`.
+
+### Controles
+
+| Ação | Teclado | Toque |
+| --- | --- | --- |
+| Mover | `WASD` ou setas | Direcional na tela |
+| Atacar | `J` ou espaço | Botão de espada |
+| Interagir / recolher / conversar | `E` | Botão `E` |
+| Tentar vínculo com criatura próxima | `K` | Botão de selo (`◎`) |
+| Correr | Segurar `Shift` | — |
+| Abrir mapa | `M` | Botão “Abrir mapa” |
+| Explorar, equipe, bestiário, crônicas, bolsa | `1`–`5` | Menu da interface |
+
+Aproxime-se do Vélion ferido junto às ruínas e use `E` para conversar. Oferecer uma fruta aumenta a confiança; em seguida, escolha “Selar vínculo”. Outras criaturas podem ser enfraquecidas antes da tentativa de captura. Explore pontos brilhantes para recolher recursos, consulte o mapa para viajar e use a tela da equipe para alimentar, reorganizar ou liberar companheiros. Criaturas ganham experiência e podem evoluir.
+
+### Salvamento
+
+O jogo salva automaticamente durante a jornada e também oferece o botão de salvamento manual. Os dados ficam no `localStorage` do navegador deste dispositivo (`eclipse-veil-save-v1`); não existe conta ou sincronização na nuvem. Use “Nova jornada” para reiniciar — a ação substitui o progresso local após confirmação. Limpar os dados do site ou trocar de navegador/dispositivo pode apagar ou não transferir o progresso.
+
+## Escopo do protótipo
+
+- Exploração top-down em canvas com regiões, obstáculos, pontos de coleta, ruínas e altar.
+- Encontros em tempo real, ataque, captura por selos e uma equipe de até quatro Vélions, além de refúgio.
+- Progressão de nível, alimentação, afinidade, evolução com escolha de forma, bestiário e crônicas com recompensas.
+- Viagem regional, interface adaptável, controles de toque, efeitos sonoros simples e salvamento local.
+
+## Premissas e limitações
+
+- É uma demonstração jogável de sistemas principais, não um RPG completo: conteúdo, mapas, encontros, balanceamento e crônicas são limitados e podem mudar.
+- O combate é deliberadamente simples e não inclui árvores complexas de habilidades, inventário de equipamento ou IA avançada.
+- A jornada é individual e funciona no cliente; não há servidor, multijogador, conta, sincronização ou proteção contra edição do salvamento local.
+- Em Android e outros dispositivos móveis, o jogo roda no navegador; não é um aplicativo nativo instalável. Recomenda-se um navegador atualizado e espaço de tela suficiente para a interface.
+- A interface e os textos estão em português brasileiro. A tipografia remota pode depender de conexão; fontes alternativas do sistema são usadas como fallback.
+
+## Projeto no OMGithub
 
 <!-- omgithub:readme:start -->
 ## 🚀 Build, play, and remix with OMGithub
