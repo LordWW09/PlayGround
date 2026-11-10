@@ -2,87 +2,92 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#10100f" />
-  <meta name="description" content="Ecos do Destino — um RPG narrativo de fantasia sombria em Aetherion." />
-  <title>Ecos do Destino — Aetherion</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101511" />
+  <meta name="description" content="Polaris Lab — simulador de viabilidade e desenvolvimento de um projeto experimental de emulação." />
+  <title>Polaris Lab — Field test</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#" aria-label="Ecos do Destino início">
-        <span class="brand-mark">✳</span><span class="brand-copy"><b>ECOS DO DESTINO</b><small>CRÔNICAS DE AETHERION</small></span>
-      </a>
-      <div class="campaign-label"><span class="live-dot"></span> CAMPANHA ATIVA</div>
-      <div class="character-card">
-        <div class="avatar" id="avatarInitial">V</div>
-        <div class="character-meta"><strong id="characterName">Viajante</strong><span id="characterClass">Andarilho · Nv. 1</span></div>
-        <button class="icon-button edit-name" id="renameBtn" aria-label="Renomear personagem">✎</button>
-      </div>
-      <div class="level-track"><div><span>PROGRESSO</span><span id="xpLabel">0 / 100 XP</span></div><div class="track"><i id="xpBar"></i></div></div>
-      <div class="side-nav" role="navigation" aria-label="Navegação do jogo">
-        <button class="nav-item active" data-panel="world"><span>⌂</span> Mundo <kbd>1</kbd></button>
-        <button class="nav-item" data-panel="journal"><span>▤</span> Diário <b class="nav-count" id="questCount">2</b></button>
-        <button class="nav-item" data-panel="codex"><span>✧</span> Códice</button>
-      </div>
-      <div class="sidebar-bottom">
-        <div class="season-card"><div class="season-icon">☾</div><div><b>Outono, ano 327</b><small>300 anos após a Ruptura</small></div></div>
-        <button class="reset-button" id="newGameBtn">↻ <span>Nova crônica</span></button>
-        <div class="autosave"><span class="save-dot"></span> Progresso salvo neste dispositivo</div>
-      </div>
+      <a class="brand" href="#" aria-label="Polaris Lab início"><span class="brand-mark">P</span><span><b>POLARIS LAB</b><small>EMULATION RESEARCH</small></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Navegação">
+        <button class="nav-item active" data-view="dashboard"><span class="nav-icon">▦</span> Painel <kbd>01</kbd></button>
+        <button class="nav-item" data-view="roadmap"><span class="nav-icon">⌁</span> Arquitetura <kbd>02</kbd></button>
+        <button class="nav-item" data-view="bench"><span class="nav-icon">◴</span> Laboratório <kbd>03</kbd></button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="hardware-card"><div class="hardware-head"><span class="status-pip"></span> MÁQUINA DE REFERÊNCIA</div><b>Polaris · 4 GB</b><p>i5-7500 <span>·</span> 16 GB RAM</p><div class="hardware-foot"><span>WINDOWS / LINUX</span><span>DEV KIT 01</span></div></div>
+      <button class="reset-button" id="resetBtn">↻ <span>Reiniciar campanha</span></button>
+      <div class="save-status"><i></i> Salvamento local ativo</div>
     </aside>
 
     <main class="main-area">
       <header class="topbar">
-        <button class="icon-button mobile-menu" id="menuBtn" aria-label="Abrir menu">☰</button>
-        <div class="breadcrumb"><span>AETHERION</span><i>›</i><b id="topLocation">VALE DE CINZAS</b></div>
-        <div class="top-actions"><div class="weather"><span>☁</span> 8° <i>·</i> Nublado</div><button class="icon-button" id="soundBtn" aria-label="Som ambiente" title="Som ambiente">♫</button><button class="avatar mini-avatar" id="topAvatar">V</button></div>
+        <button class="menu-button" id="menuBtn" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumbs"><span>POLARIS LAB</span><i>/</i><b id="crumbTitle">PAINEL DO PROJETO</b></div>
+        <div class="top-right"><span class="build-tag"><i></i> PROTÓTIPO EXPERIMENTAL</span><button class="help-button" id="aboutBtn" aria-label="Sobre o simulador">?</button></div>
       </header>
-      <section class="view active" id="worldView">
-        <div class="world-hero" id="hero">
-          <div class="hero-image"></div><div class="hero-shade"></div>
-          <div class="hero-content"><div class="eyebrow"><span class="eyebrow-line"></span> VALE DE CINZAS <span class="tag">VALTHERION</span></div>
-            <h1 id="locationTitle">Onde os corvos<br><em>se calam.</em></h1>
-            <p id="locationDescription">A estrada de pedra desce entre colinas cobertas de névoa. Ao longe, a vila de Brumafria acende suas primeiras lanternas — pequenas brasas contra uma noite que parece observar você.</p>
-            <div class="hero-meta"><span>◷ Fim de tarde</span><span>♧ Região fronteiriça</span><span>☼ Perigo moderado</span></div>
-          </div>
-          <div class="hero-coordinate">41° N &nbsp; 18° L <span>·</span> AETHERION</div>
-          <button class="map-open" id="openMap"><span>⌖</span> Ver mapa</button>
-        </div>
-        <div class="world-layout">
-          <section class="story-column">
-            <div class="section-heading"><div><span class="section-kicker">SUA JORNADA</span><h2>O fio do destino</h2></div><span class="turn-label" id="turnLabel">DIA 01 · 17:40</span></div>
-            <div class="story-feed" id="storyFeed" aria-live="polite"></div>
-            <div class="action-box">
-              <div class="action-top"><span class="action-icon">✧</span><span>O que você faz?</span><span class="free-action">AÇÃO LIVRE</span></div>
-              <form id="actionForm"><textarea id="actionInput" rows="2" placeholder="Descreva sua ação, fale com alguém ou siga sua própria vontade..." aria-label="Descreva sua ação"></textarea><div class="action-footer"><span class="hint">Pressione <kbd>Enter</kbd> para agir · <kbd>Shift + Enter</kbd> para nova linha</span><button type="submit" class="send-button">Agir <span>↗</span></button></div></form>
+
+      <section class="view active" id="dashboardView">
+        <div class="welcome-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> CICLO DE DESENVOLVIMENTO <span class="tag" id="weekTag">SEMANA 01 / 06</span></div><h1>Faça cada <em>frame</em> contar.</h1><p class="lead">Um laboratório de decisões para um emulador experimental de baixo consumo. Planeje, implemente e teste sem prometer compatibilidade que ainda não existe.</p></div><div class="week-card"><span>SPRINT ATUAL</span><b id="weekNumber">01</b><small id="actionLabel">3 ações disponíveis</small></div></div>
+
+        <div class="notice"><span class="notice-icon">i</span><p><b>Simulação de desenvolvimento, não é um emulador.</b> Os testes usam cargas sintéticas; não carregam jogos, firmware ou chaves, nem contornam proteções.</p><button id="dismissNotice" aria-label="Dispensar aviso">×</button></div>
+
+        <div class="dashboard-grid">
+          <section class="main-column">
+            <div class="section-title"><div><span class="section-kicker">RECURSOS DO PROJETO</span><h2>Orçamento da bancada</h2></div><button class="quiet-button" id="hardwareBtn">Ver máquina ↗</button></div>
+            <div class="resource-grid">
+              <article class="resource-card"><div class="resource-top"><span class="resource-icon green">◉</span><span class="resource-name">VRAM</span><span class="resource-limit">LIMITE 3.0 GB</span></div><div class="resource-value"><b id="vramValue">1.2</b><small> / 4.0 GB</small></div><div class="meter"><i id="vramMeter"></i></div><div class="resource-foot"><span>Render targets + cache</span><b id="vramState">FOLGA</b></div></article>
+              <article class="resource-card"><div class="resource-top"><span class="resource-icon amber">⌁</span><span class="resource-name">MEMÓRIA RAM</span><span class="resource-limit">ALVO 16 GB</span></div><div class="resource-value"><b id="ramValue">5.4</b><small> / 16 GB</small></div><div class="meter amber-meter"><i id="ramMeter"></i></div><div class="resource-foot"><span>Processo + sistema</span><b id="ramState">NORMAL</b></div></article>
+              <article class="resource-card"><div class="resource-top"><span class="resource-icon blue">ϟ</span><span class="resource-name">CARGA GPU</span><span class="resource-limit">ESTIMATIVA</span></div><div class="resource-value"><b id="gpuValue">46</b><small> % estimado</small></div><div class="meter blue-meter"><i id="gpuMeter"></i></div><div class="resource-foot"><span>Polaris · carga sintética</span><b id="gpuState">MODERADA</b></div></article>
+              <article class="resource-card"><div class="resource-top"><span class="resource-icon violet">◷</span><span class="resource-name">FRAME TIME</span><span class="resource-limit">META 30 FPS</span></div><div class="resource-value"><b id="frameValue">28.4</b><small> ms estimado</small></div><div class="meter violet-meter"><i id="frameMeter"></i></div><div class="resource-foot"><span>Meta teórica: 33.3 ms</span><b id="frameState">NO ALVO</b></div></article>
             </div>
+
+            <div class="section-title work-title"><div><span class="section-kicker">ESCOLHA SUAS PRÓXIMAS AÇÕES</span><h2>Quadro de trabalho</h2></div><span class="action-points"><b id="apCount">3</b> PONTOS</span></div>
+            <div class="work-grid" id="workGrid"></div>
+            <div class="feed-card"><div class="feed-heading"><div><span class="section-kicker">REGISTRO DO SPRINT</span><h3>Notas de bancada</h3></div><span class="live-label"><i></i> LIVE LOG</span></div><div id="eventLog" class="event-log" aria-live="polite"></div></div>
+            <div class="end-row"><p id="weekHint">Conclua ações para avançar seu protótipo. Testes sintéticos consomem um ponto de ação.</p><button class="primary-button" id="endWeekBtn">Fechar sprint <span>→</span></button></div>
           </section>
+
           <aside class="right-rail">
-            <section class="rail-card status-card"><div class="rail-title"><span>ESTADO</span><button class="dots" aria-label="Mais opções">···</button></div>
-              <div class="vitals"><div class="vital-row"><span class="vital-symbol heart">♥</span><div class="vital-info"><div><b>Vitalidade</b><small id="hpText">28 / 28</small></div><div class="vital-track"><i id="hpBar" class="hp"></i></div></div></div>
-              <div class="vital-row"><span class="vital-symbol spark">✦</span><div class="vital-info"><div><b>Fôlego</b><small id="staminaText">18 / 18</small></div><div class="vital-track"><i id="staminaBar" class="stamina"></i></div></div></div></div>
-              <div class="stat-grid"><div><small>OURO</small><b>◈ <span id="goldValue">24</span></b></div><div><small>REPUTAÇÃO</small><b id="repValue">Desconhecido</b></div><div><small>VIGOR</small><b id="mightValue">12</b></div><div><small>ASTÚCIA</small><b id="witValue">13</b></div></div>
-              <div class="inventory-line"><span>⌑</span><b>Inventário</b><span id="itemCount">6 itens</span><button id="inventoryBtn">Ver →</button></div>
-            </section>
-            <section class="rail-card quest-card"><div class="rail-title"><span>FIOS EM ABERTO</span><button class="text-link" data-panel="journal">Ver diário →</button></div><div id="activeQuests"></div></section>
-            <section class="omen-card"><div class="omen-mark">“</div><div><span>PRESSÁGIO</span><p id="omenText">As cinzas lembram o fogo.<br>As pedras, o que foi enterrado.</p></div><div class="omen-flourish">✳</div></section>
-            <section class="people-card"><div class="rail-title"><span>ROSTOS RECENTES</span><button class="text-link" data-panel="codex">Códice →</button></div><div id="recentPeople"></div></section>
+            <section class="rail-card progress-card"><div class="rail-head"><div><span class="section-kicker">VISÃO GERAL</span><h3>Saúde do protótipo</h3></div><span class="health-score" id="healthScore">12</span></div><div class="health-meter"><i id="healthMeter"></i></div><p id="healthCopy">Fundação inicial — ainda não validada.</p><div class="mini-stats"><div><span>CRÉDITOS</span><b id="creditsValue">120 <small>CR</small></b></div><div><span>BUGS ABERTOS</span><b id="bugsValue">2</b></div></div><div class="profile-select"><label for="profileSelect">PERFIL DE EXECUÇÃO</label><select id="profileSelect"><option value="eco">Econômico · 0,78×</option><option value="balanced" selected>Equilibrado · 1×</option><option value="quality">Qualidade · 1,24×</option></select></div><div class="budget-control"><label for="budgetRange"><span>LIMITE VRAM</span><b><span id="budgetLabel">3.0</span> GB</b></label><input id="budgetRange" type="range" min="2" max="3.8" step="0.2" value="3"><div class="range-labels"><span>2.0 GB</span><span>3.8 GB</span></div></div><div class="rail-actions"><button class="outline-button" id="testButton">▶ Rodar bateria de testes</button><small>4 testes sintéticos · sem arquivos de jogo</small></div></section>
+            <section class="rail-card milestones-card"><div class="rail-head"><div><span class="section-kicker">PORTAS DE VALIDAÇÃO</span><h3>Checklist</h3></div><span class="check-count" id="checkCount">0 / 4</span></div><div id="milestoneList" class="milestone-list"></div></section>
+            <section class="tip-card"><span class="tip-symbol">✳</span><div><span>NOTA DE VIABILIDADE</span><p>Um emulador real de console atual é um projeto de pesquisa de longo prazo. Primeiro prove cada subsistema com testes legais e reproduzíveis.</p><button id="roadmapLink">Ler plano técnico ↗</button></div></section>
           </aside>
         </div>
       </section>
-      <section class="view subview" id="journalView"><div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> MEMÓRIAS & PROMESSAS</div><h1>Diário de <em>jornada</em></h1><p>Os fios que você escolheu seguir — e aqueles que deixou para trás.</p></div><div id="journalContent"></div></section>
-      <section class="view subview" id="codexView"><div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> CONHECIMENTO REUNIDO</div><h1>Códice de <em>Aetherion</em></h1><p>Um mundo que não revela seus segredos de uma vez.</p></div><div id="codexContent"></div></section>
-      <footer class="footer-note">ECOS DO DESTINO <span>·</span> CADA ESCOLHA DEIXA UM ECO</footer>
+
+      <section class="view subview" id="roadmapView">
+        <div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> PROPOSTA TÉCNICA · RASCUNHO</div><h1>Arquitetura antes da <em>ambição.</em></h1><p>Um caminho modular, condicionado à documentação pública, testes reproduzíveis e revisão legal de cada dependência.</p></div>
+        <div class="feasibility-banner"><span>!</span><div><b>Viabilidade: não é possível prometer uma emulação funcional do Nintendo Switch 2 neste escopo.</b><p>Arquitetura de console, formatos e interfaces podem não estar publicamente documentados. O jogo citado não é presumido como existente ou compatível. RX 580 / i5-7500 são alvos de teste, não uma garantia de desempenho.</p></div></div>
+        <div class="roadmap-grid">
+          <article class="roadmap-card highlight-card"><span class="roadmap-index">01 / CAMADAS</span><h3>Separar para validar</h3><div class="stack-list"><div><b>Host & interface</b><span>Biblioteca legal, configuração, logs e telemetria.</span></div><div><b>Serviços do sistema</b><span>Interfaces documentadas; stubs explícitos antes de compatibilidade.</span></div><div><b>CPU & memória</b><span>Intérprete de referência, modelo de memória e testes unitários; JIT só após correção.</span></div><div><b>GPU · Vulkan</b><span>Backend modular, recursos limitados e renderizado de teste sintético.</span></div><div><b>Áudio · entrada · FS</b><span>Abstrações host independentes e dados de teste próprios.</span></div></div></article>
+          <article class="roadmap-card"><span class="roadmap-index">02 / TECNOLOGIAS</span><h3>Base multiplataforma</h3><ul><li><b>C++20</b> para núcleo com módulos e limites de memória explícitos.</li><li><b>Vulkan</b> como API gráfica; fallback por capacidades verificadas, não por nome da GPU.</li><li><b>SDL3</b> para janela, entrada e áudio multiplataforma.</li><li><b>CTest + sanitizers</b> para testes, fuzzing de parsers próprios e detecção de vazamentos.</li><li><b>UI web ou Qt</b> avaliada separadamente conforme custo de manutenção.</li></ul><p class="small-note">Dependências são candidatas; confirmar versões, suporte a Windows/Linux e licenças no momento da implementação.</p></article>
+          <article class="roadmap-card"><span class="roadmap-index">03 / MEMÓRIA & POLARIS</span><h3>Orçamento explícito</h3><ul><li>Começar com 3 GB de orçamento máximo configurável, abaixo dos 4 GB nominais da placa.</li><li>Contabilizar render targets, buffers e cache; aplicar descarte LRU com telemetria.</li><li>Resolução interna e limite de FPS configuráveis; preset econômico reduz resolução e cache.</li><li>Shaders persistentes com versão, checksum e compilação assíncrona controlada.</li><li>Medir temperatura/VRAM apenas via interfaces suportadas pelo sistema; exibir indisponibilidade sem inventar métricas.</li></ul></article>
+          <article class="roadmap-card"><span class="roadmap-index">04 / LICENÇAS & SEGURANÇA</span><h3>Sem atalhos indevidos</h3><ul><li>Não distribuir jogos, firmware, chaves ou material proprietário.</li><li>Não implementar descriptografia, quebra de proteção ou extração de conteúdo protegido.</li><li>Reutilização só após auditoria de licença, atribuição e obrigações de distribuição.</li><li>Entrada de arquivos do usuário: validar formato e limites; não executar conteúdo desconhecido no processo principal.</li></ul><p class="small-note">Nenhum componente de outro emulador foi incorporado a este protótipo.</p></article>
+        </div>
+        <div class="phase-heading"><div><span class="section-kicker">PLANO DE ENTREGA</span><h2>Marcos verificáveis</h2></div><span class="phase-caption">PROGRESSO DO SIMULADOR <b id="roadmapProgress">0%</b></span></div>
+        <div class="phase-list" id="phaseList"></div>
+      </section>
+
+      <section class="view subview" id="benchView">
+        <div class="subview-header"><div class="eyebrow"><span class="eyebrow-line"></span> TESTES REPRODUZÍVEIS</div><h1>Laboratório de <em>compatibilidade.</em></h1><p>Os resultados abaixo exercitam apenas cargas e stubs próprios. São progresso de projeto simulado, não evidência de compatibilidade com console ou jogos.</p></div>
+        <div class="bench-summary"><div><span class="section-kicker">ÚLTIMA EXECUÇÃO</span><h2 id="lastRunTitle">Ainda não executada</h2><p id="lastRunText">Monte os subsistemas no Painel e rode a bateria sintética quando estiver pronto.</p></div><button class="primary-button" id="benchRunBtn">Executar bateria <span>→</span></button></div>
+        <div class="test-grid" id="testGrid"></div>
+        <div class="report-card"><div><span class="section-kicker">RELATÓRIO TÉCNICO</span><h3>Registro de execução</h3></div><pre id="testReport">POLARIS LAB / SYNTHETIC TEST HARNESS
+Nenhuma execução registrada.</pre><button class="outline-button" id="downloadReport">Baixar relatório .txt</button></div>
+      </section>
+      <footer class="footer-note">POLARIS LAB <span>·</span> PROTÓTIPO DE VIABILIDADE <span>·</span> NÃO É UM EMULADOR</footer>
     </main>
   </div>
-  <div class="map-overlay" id="mapOverlay" aria-hidden="true"><div class="map-panel"><div class="modal-head"><div><span class="section-kicker">AETHERION · CARTA-MÚNDI</span><h2>Um mundo <em>por descobrir</em></h2></div><button class="icon-button close-map" aria-label="Fechar mapa">×</button></div><p class="map-intro">Escolha para onde os seus passos levam. Cada região guarda histórias próprias.</p><div class="region-grid" id="regionGrid"></div><div class="map-legend"><span><i class="legend-dot here"></i> Você está aqui</span><span><i class="legend-dot open"></i> Caminhos conhecidos</span><span><i class="legend-dot veil"></i> Além da névoa</span></div></div></div>
   <div class="toast" id="toast" role="status"></div>
+  <dialog id="aboutDialog" class="about-dialog"><button class="dialog-close" id="closeAbout" aria-label="Fechar">×</button><span class="section-kicker">SOBRE O PROJETO</span><h2>Honestidade de bancada.</h2><p>Polaris Lab é um jogo de gestão/viabilidade. Ele não executa código ARM, não interpreta jogos e não representa compatibilidade real. Use-o para explorar custos, prioridades e critérios de validação de um projeto experimental.</p><button class="primary-button" id="gotItBtn">Entendi <span>✓</span></button></dialog>
   <script src="game.js"></script>
 </body>
 </html>
