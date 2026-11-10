@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#11110f" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>SEED — Grimório de Campanhas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="SEED início"><span class="brand-mark">✦</span><span><b>SEED</b><small>GRIMÓRIO VIRTUAL</small></span></a>
+      <div class="realm-label">A JORNADA</div>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="nav-link active" data-view="dashboard"><span>⌂</span> Visão geral</button>
+        <button class="nav-link" data-view="campaigns"><span>♜</span> Campanhas <i id="campaign-count">0</i></button>
+        <button class="nav-link" data-view="characters"><span>♙</span> Personagens</button>
+        <button class="nav-link" data-view="systems"><span>⌘</span> Sistemas</button>
+        <button class="nav-link" data-view="library"><span>▧</span> Biblioteca</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="local-card"><span class="local-dot"></span><div><b>Arquivo local</b><small>Seus dados ficam neste dispositivo</small></div></div>
+        <button class="nav-link" data-view="settings"><span>⚙</span> Configurações</button>
+        <div class="profile"><div class="avatar avatar-gold">M</div><div><b>Mestre errante</b><small>Guardião do grimório</small></div><button id="profile-menu" title="Perfil">···</button></div>
+      </div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumb"><span>SEED</span><span class="crumb-sep">/</span><b id="page-title">Visão geral</b></div>
+        <div class="top-actions"><span class="saved-state"><span class="save-dot"></span> Salvamento automático</span><button class="icon-btn" id="quick-dice" title="Rolar dados">⚄</button><button class="primary-btn small" id="top-create">＋ <span>Criar campanha</span></button></div>
+      </header>
+      <div id="view-root" class="view-root"></div>
+    </main>
+  </div>
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
