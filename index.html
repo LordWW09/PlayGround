@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+  <meta name="theme-color" content="#080b12" />
+  <title>Shadow Ascension</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080b12'/%3E%3Cpath d='M32 7 37 25 55 32 37 37 32 57 26 38 8 32 26 26Z' fill='%2372e5e9'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app">
+    <canvas id="game" aria-label="Campo de batalha"></canvas>
+    <div class="noise"></div>
+    <header class="topbar"><a class="brand" href="#home" aria-label="Shadow Ascension"><span class="brand-mark">✦</span><span>SHADOW <b>ASCENSION</b></span></a><div class="top-meta"><span class="status-dot"></span> <span id="save-status">PROGRESSO SALVO</span><button class="icon-btn" id="sound-toggle" aria-label="Alternar som">♫</button></div></header>
+    <section id="home-screen" class="screen active">
+      <div class="home-copy"><div class="eyebrow"><i></i> ARQUIVO DO CAÇADOR <span>01 — DESPERTAR</span></div><h1>O poder<br>vem <em>das sombras.</em></h1><p class="lead">Um portal se abriu. A horda se aproxima.<br>Levante-se, caçador — e faça da noite seu exército.</p><div class="home-actions"><button class="primary-btn" id="play-btn"><span>INICIAR CAÇADA</span><b>↗</b></button><button class="text-btn" data-panel="campaign">CONTINUAR CAMPANHA <span>→</span></button></div><div class="home-stats"><div><small>NÍVEL DO CAÇADOR</small><strong id="home-level">01</strong></div><div><small>PORTAIS SELADOS</small><strong id="home-portals">00 <i>/ 10</i></strong></div><div><small>PODER DE COMBATE</small><strong id="home-power">1,240</strong></div></div></div>
+      <div class="hero-stage" id="hero-stage" aria-label="Guerreiro em exibição"><div class="stage-orbit orbit-a"></div><div class="stage-orbit orbit-b"></div><div class="stage-ground"></div><div class="hero-shadow"></div><div class="hero-figure" id="hero-figure"><div class="cape"></div><div class="hero-leg leg-left"></div><div class="hero-leg leg-right"></div><div class="hero-body"><div class="chest-mark"></div></div><div class="hero-arm arm-left"></div><div class="hero-arm arm-right"></div><div class="hero-head"><div class="hair"></div><div class="eye-glow"></div></div><div class="hero-sword"><i></i></div><div class="hero-aura"></div></div><div class="hero-label"><span>CAÇADOR DESPERTADO</span><strong>NOX <i>—</i> ECLIPSE</strong></div><div class="drag-hint">⟲ ARRASTE PARA GIRAR</div></div>
+      <nav class="main-nav"><button data-panel="character"><span>01</span> PERSONAGEM</button><button data-panel="equipment"><span>02</span> EQUIPAMENTOS</button><button data-panel="shadows"><span>03</span> EXÉRCITO</button><button data-panel="campaign"><span>04</span> CAMPANHA</button><button data-panel="talents"><span>05</span> TALENTOS</button><button data-panel="settings"><span>06</span> AJUSTES</button></nav>
+    </section>
+    <section id="game-hud" class="hidden"><div class="hud-top"><div class="hud-player"><div class="mini-portrait">✦</div><div class="hud-bars"><div class="hud-name"><b>NOX</b><span id="hud-level">NÍVEL 1</span></div><div class="bar hp"><i id="hp-fill"></i></div><div class="bar xp"><i id="xp-fill"></i></div></div></div><div class="stage-title"><small>CAPÍTULO 01 · FASE 01</small><b>PRIMEIRO PORTAL</b></div><div class="run-stats"><span>ELIMINAÇÕES <b id="kills">0</b></span><span class="timer" id="timer">00:00</span><button id="pause-btn" class="icon-btn">Ⅱ</button></div></div><div class="boss-bar hidden" id="boss-bar"><div><small>GUARDIÃO DO VÉU</small><span id="boss-hp-label">100%</span></div><i><b id="boss-fill"></b></i></div><div id="level-toast" class="level-toast hidden">NÍVEL AUMENTADO <strong id="toast-level">02</strong></div><div class="skill-hud" id="skill-hud"></div><div class="touch-controls"><div class="joystick" id="joystick"><div class="joy-knob"></div></div><button id="dodge-btn" class="touch-action">⤴<small>ESQUIVA</small></button></div><div class="desktop-help">WASD / SETAS <span>MOVIMENTO</span><i>•</i> ESPAÇO <span>ESQUIVA</span></div></section>
+    <section id="panel" class="overlay hidden"><div class="panel-card"><button class="close-btn" id="close-panel">×</button><div class="panel-eyebrow">REGISTRO DO CAÇADOR</div><h2 id="panel-title">Personagem</h2><div id="panel-content"></div></div></section>
+    <section id="level-modal" class="overlay hidden"><div class="level-card"><div class="panel-eyebrow">RESSONÂNCIA DETECTADA</div><h2>Escolha seu <em>destino.</em></h2><p>O poder cresce com cada inimigo derrotado.</p><div class="upgrade-list" id="upgrade-list"></div></div></section>
+    <section id="pause-modal" class="overlay hidden"><div class="pause-card"><div class="panel-eyebrow">CAÇADA INTERROMPIDA</div><h2>Respire, caçador.</h2><p>Seu progresso é salvo automaticamente.</p><button class="primary-btn" id="resume-btn">VOLTAR À BATALHA <b>→</b></button><button class="text-btn" id="leave-btn">ABANDONAR CAÇADA</button></div></section>
+    <section id="result-modal" class="overlay hidden"><div class="pause-card result-card"><div class="panel-eyebrow" id="result-kicker">PORTAL SELADO</div><h2 id="result-title">Vitória.</h2><p id="result-copy"></p><div id="result-rewards" class="result-rewards"></div><button class="primary-btn" id="result-continue">RETORNAR AO REFÚGIO <b>→</b></button></div></section>
+    <div id="toast" class="toast hidden"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
